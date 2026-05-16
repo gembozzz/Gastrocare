@@ -19,7 +19,7 @@ Berbeda dengan mesin pencari konvensional yang sering kali memberikan informasi 
 
 ## 🛠️ Tech Stack & Sumber Daya
 
-*   **Frontend & Backend:** React / Next.js, FastAPI / Flask, PostgreSQL / Firebase
+*   **Frontend & Backend:** React.js, Express.js, FastAPI, PostgreSQL
 *   **Data Science & AI/ML:** Python, TensorFlow / PyTorch, Scikit-Learn, Vector Database (ChromaDB / Pinecone)
 *   **Metode AI:** Deep Learning Classification & Retrieval-Augmented Generation (RAG)
 
