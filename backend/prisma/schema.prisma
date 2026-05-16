@@ -1,0 +1,79 @@
+// ============================================
+// GastroCare - Prisma Schema
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ────────────────────────────────────
+
+enum Role {
+  ADMIN
+  DOCTOR
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+}
+
+// ── Models ───────────────────────────────────
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  text      String
+  order     Int      @unique
+  isActive  Boolean  @default(true) @map("is_active")
+  options   Option[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("questions")
+}
+
+model Option {
+  id         Int      @id @default(autoincrement())
+  text       String
+  score      Int // 0–5
+  order      Int
+  questionId Int      @map("question_id")
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("options")
+}
+
+model Assessment {
+  id          String    @id @default(uuid())
+  sessionId   String?   @map("session_id")
+  userEmail   String?   @map("user_email")
+  userName    String?   @map("user_name")
+  answers     Json // Array of { questionId, optionId, score }
+  totalScore  Int       @map("total_score")
+  maxScore    Int       @map("max_score")
+  percentage  Int
+  riskLevel   RiskLevel @map("risk_level")
+  ipAddress   String?   @map("ip_address")
+  userAgent   String?   @map("user_agent")
+  completedAt DateTime  @default(now()) @map("completed_at")
+
+  @@map("assessments")
+}
