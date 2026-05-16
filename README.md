@@ -12,7 +12,6 @@ Berbeda dengan mesin pencari konvensional yang sering kali memberikan informasi 
 ## 🚀 Fitur Utama
 
 *   **📊 Smart Symptom Questionnaire:** Menggunakan model **Deep Learning** untuk menganalisis korelasi antar gejala yang diinput pengguna, lalu mengklasifikasikan tingkat risiko penyakit lambung secara personal.
-*   **💬 Verified Medical Chatbot (RAG):** Chatbot interaktif terintegrasi menggunakan metode **Retrieval-Augmented Generation (RAG)**. Chatbot hanya mengambil informasi dari basis data dokumen medis yang kredibel untuk menjawab pertanyaan pengguna tanpa risiko halusinasi AI.
 *   **📱 Responsive & Clean UI:** Antarmuka kuesioner yang intuitif dan mudah digunakan oleh masyarakat awam untuk mendapatkan *actionable insights* secara cepat.
 
 ---
