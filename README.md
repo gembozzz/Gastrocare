@@ -1,4 +1,4 @@
-# 🩺 GastroCare: Smart Gastric Health Screening & AI Assistant
+# 🩺 GastroCare: Smart Gastric Health Screening
 
 > **Capstone Project Theme:** Healthy Lives & Well-being  
 > **Status:** Active / In Development  
