@@ -1,4 +1,13 @@
+# Mengabaikan semua folder node_modules di manapun posisinya
 node_modules/
+
+# Mengabaikan file konfigurasi rahasia
 .env
-dist/
+.env.local
+
+# Mengabaikan file log dan temporary sampah
 *.log
+
+# Mengabaikan output build frontend
+dist/
+build/

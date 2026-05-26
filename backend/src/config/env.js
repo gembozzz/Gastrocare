@@ -35,6 +35,7 @@ const env = {
   SMTP_PORT: parseInt(process.env.SMTP_PORT, 10) || 587,
   SMTP_USER: process.env.SMTP_USER || '',
   SMTP_PASS: process.env.SMTP_PASS || '',
+  AI_API_URL: process.env.AI_API_URL || 'http://localhost:8000',
 };
 
 module.exports = { env };

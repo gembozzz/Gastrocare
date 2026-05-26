@@ -7,30 +7,42 @@ import Button from '../components/Button'
 
 const riskConfig = {
   LOW: {
-    level: 'Low Risk',
+    level: 'Risiko Rendah',
     color: 'text-emerald-600',
     bgColor: 'bg-emerald-500',
     borderColor: 'border-emerald-200 bg-emerald-50/50',
     icon: 'check',
     ringColor: 'bg-emerald-100',
+    gradientFrom: 'from-emerald-400',
+    gradientTo: 'to-teal-500',
   },
   MODERATE: {
-    level: 'Moderate Risk',
+    level: 'Risiko Sedang',
     color: 'text-amber-600',
     bgColor: 'bg-amber-500',
     borderColor: 'border-amber-200 bg-amber-50/50',
     icon: 'warning',
     ringColor: 'bg-amber-100',
+    gradientFrom: 'from-amber-400',
+    gradientTo: 'to-orange-500',
   },
   HIGH: {
-    level: 'High Risk',
+    level: 'Risiko Tinggi',
     color: 'text-red-600',
     bgColor: 'bg-red-500',
     borderColor: 'border-red-200 bg-red-50/50',
     icon: 'alert',
     ringColor: 'bg-red-100',
+    gradientFrom: 'from-red-400',
+    gradientTo: 'to-rose-600',
   },
 }
+
+const formatDiseaseName = (name) => {
+  return name
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+};
 
 function ResultPage() {
   const location = useLocation()
@@ -52,6 +64,13 @@ function ResultPage() {
     // Gabungkan data API + display config menjadi satu object result
     setResult({
       ...config,
+      // AI prediction data
+      prediksi: apiResult.prediksi,
+      kepercayaan: apiResult.kepercayaan,
+      top3: apiResult.top3 || [],
+      semuaProbabilitas: apiResult.semuaProbabilitas || {},
+      peringatan: apiResult.peringatan,
+      // Backward compatible
       score: apiResult.totalScore,
       totalPossible: apiResult.maxScore,
       percentage: apiResult.percentage,
@@ -59,7 +78,6 @@ function ResultPage() {
       habits: apiResult.habits,
     })
 
-    // Fix bug: setTimeout dengan cleanup
     const timer = setTimeout(() => setAnimateIn(true), 100)
     return () => clearTimeout(timer)
   }, [location.state, navigate])
@@ -84,7 +102,8 @@ function ResultPage() {
     ),
   }
 
-
+  // Parse confidence percentage for progress bar
+  const confidenceNum = parseFloat(result.kepercayaan) || 0
 
   return (
     <div className="min-h-[calc(100vh-4rem)]">
@@ -100,10 +119,10 @@ function ResultPage() {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
-          Back to Home
+          Kembali ke Beranda
         </button>
 
-        {/* Result Card */}
+        {/* Main Result Card */}
         <div className={`transition-all duration-700 ${animateIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Card className="p-8 sm:p-10 text-center mb-6" hover={false} id="result-card">
             {/* Icon */}
@@ -115,33 +134,90 @@ function ResultPage() {
               </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Your GERD Risk Assessment</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Hasil Analisis AI</h1>
+            <p className="text-sm text-gray-400 mb-6">Prediksi menggunakan model Deep Learning</p>
 
-            {/* Risk Level Badge */}
-            <div className={`inline-flex items-center px-6 py-2 rounded-full ${result.bgColor} text-white font-bold text-sm mb-4`}>
-              {result.level}
+            {/* Disease Prediction Badge */}
+            <div className={`inline-flex items-center px-6 py-3 rounded-2xl bg-gradient-to-r ${result.gradientFrom} ${result.gradientTo} text-white font-bold text-lg mb-3 shadow-lg`}>
+              {formatDiseaseName(result.prediksi)}
             </div>
 
-            {/* Score */}
-            <p className="text-sm text-gray-400 mb-6">
-              Score: {result.score} / {result.totalPossible} • {result.percentage}%
+            {/* Confidence */}
+            <p className="text-sm text-gray-500 mb-6">
+              Tingkat Kepercayaan: <span className="font-bold text-gray-700">{result.kepercayaan}</span>
             </p>
 
-            {/* Score Bar */}
+            {/* Confidence Bar */}
             <div className="max-w-sm mx-auto mb-2">
               <Card className="p-4" hover={false}>
                 <p className="text-sm text-gray-600 mb-3">
-                  Your symptoms suggest a {result.level.toLowerCase().replace(' risk', '')} risk for GERD.
+                  Model AI memprediksi <span className="font-semibold">{formatDiseaseName(result.prediksi)}</span> dengan tingkat kepercayaan {result.kepercayaan}
                 </p>
                 <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
                   <div
-                    className={`h-full ${result.bgColor} rounded-full transition-all duration-1000 ease-out`}
-                    style={{ width: animateIn ? `${result.percentage}%` : '0%' }}
+                    className={`h-full bg-gradient-to-r ${result.gradientFrom} ${result.gradientTo} rounded-full transition-all duration-1000 ease-out`}
+                    style={{ width: animateIn ? `${confidenceNum}%` : '0%' }}
                   />
                 </div>
               </Card>
             </div>
           </Card>
+
+          {/* AI Warning */}
+          {result.peringatan && (
+            <Card className="p-5 mb-6 border-l-4 border-amber-400 bg-amber-50/50" hover={false} id="ai-warning">
+              <div className="flex items-start gap-3">
+                <span className="text-xl">⚠️</span>
+                <p className="text-sm text-amber-800">{result.peringatan}</p>
+              </div>
+            </Card>
+          )}
+
+          {/* Top 3 Predictions */}
+          {result.top3 && result.top3.length > 0 && (
+            <Card className="p-6 sm:p-8 mb-6" hover={false} id="top3-card">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Top 3 Kemungkinan
+              </h2>
+              <div className="space-y-3">
+                {result.top3.map((item, index) => {
+                  const prob = parseFloat(item.probabilitas) || 0
+                  const isTop = index === 0
+                  const barColors = [
+                    `bg-gradient-to-r ${result.gradientFrom} ${result.gradientTo}`,
+                    'bg-gradient-to-r from-blue-400 to-indigo-500',
+                    'bg-gradient-to-r from-gray-400 to-slate-500',
+                  ]
+                  return (
+                    <div key={index} className={`p-3 rounded-xl ${isTop ? 'bg-blue-50/50 border border-blue-100' : 'bg-gray-50'}`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isTop ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                            #{index + 1}
+                          </span>
+                          <span className={`text-sm font-semibold ${isTop ? 'text-blue-700' : 'text-gray-700'}`}>
+                            {formatDiseaseName(item.kelas)}
+                          </span>
+                        </div>
+                        <span className={`text-sm font-bold ${isTop ? 'text-blue-600' : 'text-gray-500'}`}>
+                          {item.probabilitas}
+                        </span>
+                      </div>
+                      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-1000 ease-out ${barColors[index]}`}
+                          style={{ width: animateIn ? `${prob}%` : '0%' }}
+                        />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
 
           {/* Recommendations */}
           <Card className={`p-8 sm:p-10 mb-6 border-l-4 ${result.borderColor}`} hover={false} id="recommendations-card">
@@ -172,6 +248,16 @@ function ResultPage() {
             </div>
           </Card>
 
+          {/* Risk Level Badge */}
+          <Card className="p-4 mb-6 text-center" hover={false} id="risk-badge">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-sm text-gray-500">Tingkat Risiko:</span>
+              <span className={`inline-flex items-center px-4 py-1 rounded-full text-white font-bold text-xs ${result.bgColor}`}>
+                {result.level}
+              </span>
+            </div>
+          </Card>
+
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-8" id="result-actions">
             <Button
@@ -181,27 +267,27 @@ function ResultPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              Take Assessment Again
+              Ulangi Asesmen
             </Button>
             <Button
               to="/about"
               variant="secondary"
-              id="learn-more-gerd"
+              id="learn-more"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Learn More About GERD
+              Pelajari Lebih Lanjut
             </Button>
           </div>
 
           {/* Disclaimer */}
           <div className="text-center py-6 border-t border-gray-200" id="result-disclaimer">
             <p className="text-xs text-gray-400 leading-relaxed max-w-lg mx-auto">
-              <span className="font-bold text-gray-500">Medical Disclaimer:</span>{' '}
-              This assessment is for informational purposes only and does not constitute medical advice.
-              Please consult with a qualified healthcare provider for proper diagnosis and treatment.
-              This tool is not a substitute for professional medical evaluation.
+              <span className="font-bold text-gray-500">Disclaimer Medis:</span>{' '}
+              Hasil asesmen ini dihasilkan oleh model AI dan hanya untuk tujuan informasi.
+              Ini BUKAN pengganti diagnosis dari dokter.
+              Silakan konsultasikan dengan tenaga medis profesional untuk diagnosis dan penanganan yang tepat.
             </p>
           </div>
         </div>

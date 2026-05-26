@@ -8,14 +8,20 @@ const { sendAssessmentResultEmail } = require('../services/emailService');
 
 /**
  * POST /api/assessments
- * Submit a new GERD risk assessment (PUBLIC endpoint).
+ * Submit a new assessment — sekarang menggunakan model AI untuk prediksi.
  */
 async function submitAssessment(req, res, next) {
   try {
     const { answers, userEmail, userName, sessionId } = req.body;
 
-    // Calculate risk using the service
-    const result = calculateRisk(answers);
+    // Ambil data pertanyaan dari DB (perlu order untuk mapping ke fitur AI)
+    const questions = await prisma.question.findMany({
+      where: { isActive: true },
+      select: { id: true, order: true },
+    });
+
+    // Calculate risk menggunakan model AI
+    const result = await calculateRisk(answers, questions);
 
     // Capture request metadata
     const ipAddress =
@@ -33,6 +39,9 @@ async function submitAssessment(req, res, next) {
         maxScore: result.maxScore,
         percentage: result.percentage,
         riskLevel: result.riskLevel,
+        prediksi: result.prediksi,
+        kepercayaan: result.kepercayaan,
+        top3: result.top3,
         ipAddress,
         userAgent,
       },
@@ -50,6 +59,13 @@ async function submitAssessment(req, res, next) {
       success: true,
       data: {
         id: assessment.id,
+        // AI prediction results
+        prediksi: result.prediksi,
+        kepercayaan: result.kepercayaan,
+        top3: result.top3,
+        semuaProbabilitas: result.semuaProbabilitas,
+        peringatan: result.peringatan,
+        // Backward-compatible fields
         totalScore: result.totalScore,
         maxScore: result.maxScore,
         percentage: result.percentage,
@@ -103,6 +119,7 @@ async function getAssessments(req, res, next) {
       where.OR = [
         { userEmail: { contains: search } },
         { userName: { contains: search } },
+        { prediksi: { contains: search } },
       ];
     }
 
@@ -151,15 +168,10 @@ async function getAssessmentById(req, res, next) {
       });
     }
 
-    // Re-compute recommendation/habits for the response
-    const result = calculateRisk(assessment.answers);
-
     res.json({
       success: true,
       data: {
         ...assessment,
-        recommendation: result.recommendation,
-        habits: result.habits,
       },
     });
   } catch (error) {

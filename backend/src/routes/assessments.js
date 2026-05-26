@@ -27,8 +27,8 @@ const submitAssessmentRules = [
     .isInt({ min: 1 })
     .withMessage('Each answer must have a valid optionId.'),
   body('answers.*.score')
-    .isInt({ min: 0, max: 5 })
-    .withMessage('Each answer score must be between 0 and 5.'),
+    .isInt({ min: 0, max: 3 })
+    .withMessage('Each answer score must be between 0 and 3.'),
   body('userEmail')
     .optional({ values: 'null' })
     .isEmail()

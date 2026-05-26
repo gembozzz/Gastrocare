@@ -127,7 +127,7 @@ function QuestionnairePage() {
               <div className="h-4 bg-gray-200 rounded-lg animate-pulse w-5/6" />
             </div>
             <div className="mt-8 space-y-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+              {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="h-12 bg-gray-100 rounded-xl animate-pulse" />
               ))}
             </div>

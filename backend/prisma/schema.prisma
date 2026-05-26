@@ -71,6 +71,10 @@ model Assessment {
   maxScore    Int       @map("max_score")
   percentage  Int
   riskLevel   RiskLevel @map("risk_level")
+  // AI Prediction fields
+  prediksi    String?   // Nama penyakit hasil prediksi AI
+  kepercayaan String?   // Confidence level (e.g. "85.3%")
+  top3        Json?     // Top 3 predictions array
   ipAddress   String?   @map("ip_address")
   userAgent   String?   @map("user_agent")
   completedAt DateTime  @default(now()) @map("completed_at")
