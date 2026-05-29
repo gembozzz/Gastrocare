@@ -6,6 +6,9 @@ import ProgressBar from '../components/ProgressBar'
 import QuestionCard from '../components/QuestionCard'
 import { questions as fallbackQuestions } from '../data/questions'
 import { getQuestions, submitAssessment } from '../lib/api'
+import { useLanguage } from '../lib/languageContext'
+import { t } from '../lib/translations'
+import { translateQuestion, translateOption, translateError } from '../lib/dataTranslations'
 
 function QuestionnairePage() {
   const [questions, setQuestions] = useState(null)
@@ -15,6 +18,8 @@ function QuestionnairePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const navigate = useNavigate()
+  const { language } = useLanguage()
+  const tr = (key) => t('questionnaire', key, language)
 
   // ── Fetch pertanyaan dari API ────────────────────────
 
@@ -150,13 +155,13 @@ function QuestionnairePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h2 className="text-lg font-bold text-gray-900 mb-2">Gagal Memuat Pertanyaan</h2>
-            <p className="text-sm text-gray-500 mb-6">{error || 'Terjadi kesalahan yang tidak diketahui.'}</p>
+            <h2 className="text-lg font-bold text-gray-900 mb-2">{tr('loadingError')}</h2>
+            <p className="text-sm text-gray-500 mb-6">{error ? translateError(error, language) : tr('loadingErrorDefault')}</p>
             <Button onClick={fetchQuestions} id="btn-retry">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              Coba Lagi
+              {tr('retryBtn')}
             </Button>
           </Card>
         </div>
@@ -184,8 +189,8 @@ function QuestionnairePage() {
         {/* Question Card */}
         <Card className="p-8 sm:p-10 mb-8" hover={false} id="questionnaire-card">
           <QuestionCard
-            question={questions[currentQuestion].question}
-            options={questions[currentQuestion].options.map((opt) => opt.text)}
+            question={translateQuestion(questions[currentQuestion].question, language)}
+            options={questions[currentQuestion].options.map((opt) => translateOption(opt.text, language))}
             selectedAnswer={answers[currentQuestion]}
             onSelectAnswer={handleSelectAnswer}
           />
@@ -197,7 +202,7 @@ function QuestionnairePage() {
             <svg className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p className="text-sm text-red-700">{error}</p>
+            <p className="text-sm text-red-700">{translateError(error, language)}</p>
           </div>
         )}
 
@@ -212,7 +217,7 @@ function QuestionnairePage() {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
-            Previous
+            {tr('previousBtn')}
           </Button>
 
           <Button
@@ -226,11 +231,11 @@ function QuestionnairePage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
-                Submitting...
+                {tr('submitting')}
               </>
             ) : (
               <>
-                {isLastQuestion ? 'See Results' : 'Next'}
+                {isLastQuestion ? tr('seeResults') : tr('nextBtn')}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

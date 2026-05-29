@@ -10,7 +10,7 @@
 #  2. Buat environment baru, jangan lupa install semua dependencies di atas
 #     Cara membuat environment baru (venv):
 #     Jalankan di terminal: - py -3.11 -m venv venv311
-#                           - venv311/Scripts/activate (Wajib diaktifkan setiap kali mau jalankan API)
+#                           - venv/Scripts/activate (Wajib diaktifkan setiap kali mau jalankan API)
 #                           - pip install fastapi uvicorn tensorflow joblib numpy keras==3.13.2
 #  Jika sudah jalankan: uvicorn main:app --reload --port 8000
 #  Docs    : http://localhost:8000/docs

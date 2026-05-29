@@ -2,6 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Button from '../components/Button'
+import { useLanguage } from '../lib/languageContext'
+import { t } from '../lib/translations'
+import { translateRecommendation, translateHabitsTitle, translateHabitsItem, translateWarning } from '../lib/dataTranslations'
 
 // ── Risk Level → Display Config ────────────────────────
 
@@ -49,6 +52,8 @@ function ResultPage() {
   const navigate = useNavigate()
   const [result, setResult] = useState(null)
   const [animateIn, setAnimateIn] = useState(false)
+  const { language } = useLanguage()
+  const tr = (key) => t('result', key, language)
 
   useEffect(() => {
     const apiResult = location.state?.result
@@ -70,6 +75,8 @@ function ResultPage() {
       top3: apiResult.top3 || [],
       semuaProbabilitas: apiResult.semuaProbabilitas || {},
       peringatan: apiResult.peringatan,
+      // Raw risk level key for dynamic translation
+      riskLevel: apiResult.riskLevel || 'LOW',
       // Backward compatible
       score: apiResult.totalScore,
       totalPossible: apiResult.maxScore,
@@ -119,7 +126,7 @@ function ResultPage() {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
-          Kembali ke Beranda
+          {tr('backHome')}
         </button>
 
         {/* Main Result Card */}
@@ -134,8 +141,8 @@ function ResultPage() {
               </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Hasil Analisis AI</h1>
-            <p className="text-sm text-gray-400 mb-6">Prediksi menggunakan model Deep Learning</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{tr('aiResultTitle')}</h1>
+            <p className="text-sm text-gray-400 mb-6">{tr('aiResultDesc')}</p>
 
             {/* Disease Prediction Badge */}
             <div className={`inline-flex items-center px-6 py-3 rounded-2xl bg-gradient-to-r ${result.gradientFrom} ${result.gradientTo} text-white font-bold text-lg mb-3 shadow-lg`}>
@@ -144,14 +151,14 @@ function ResultPage() {
 
             {/* Confidence */}
             <p className="text-sm text-gray-500 mb-6">
-              Tingkat Kepercayaan: <span className="font-bold text-gray-700">{result.kepercayaan}</span>
+              {tr('confidenceLabel')} <span className="font-bold text-gray-700">{result.kepercayaan}</span>
             </p>
 
             {/* Confidence Bar */}
             <div className="max-w-sm mx-auto mb-2">
               <Card className="p-4" hover={false}>
                 <p className="text-sm text-gray-600 mb-3">
-                  Model AI memprediksi <span className="font-semibold">{formatDiseaseName(result.prediksi)}</span> dengan tingkat kepercayaan {result.kepercayaan}
+                  {tr('confidenceDesc1')}<span className="font-semibold">{formatDiseaseName(result.prediksi)}</span>{tr('confidenceDesc2')}{result.kepercayaan}
                 </p>
                 <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
                   <div
@@ -168,7 +175,7 @@ function ResultPage() {
             <Card className="p-5 mb-6 border-l-4 border-amber-400 bg-amber-50/50" hover={false} id="ai-warning">
               <div className="flex items-start gap-3">
                 <span className="text-xl">⚠️</span>
-                <p className="text-sm text-amber-800">{result.peringatan}</p>
+                <p className="text-sm text-amber-800">{translateWarning(result.peringatan, language)}</p>
               </div>
             </Card>
           )}
@@ -180,7 +187,7 @@ function ResultPage() {
                 <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                Top 3 Kemungkinan
+                {tr('top3Title')}
               </h2>
               <div className="space-y-3">
                 {result.top3.map((item, index) => {
@@ -234,13 +241,13 @@ function ResultPage() {
                 )}
               </div>
               <div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">{result.recommendation}</p>
-                <p className="font-bold text-gray-800 text-sm mb-3">{result.habits.title}</p>
+                <p className="text-gray-700 text-sm leading-relaxed mb-4">{translateRecommendation(result.recommendation, language)}</p>
+                <p className="font-bold text-gray-800 text-sm mb-3">{translateHabitsTitle(result.habits.title, language)}</p>
                 <ul className="space-y-2">
                   {result.habits.items.map((item, index) => (
                     <li key={index} className="flex items-start gap-2.5">
                       <div className={`w-2 h-2 rounded-full ${result.bgColor} mt-1.5 flex-shrink-0`} />
-                      <span className="text-sm text-gray-600">{item}</span>
+                      <span className="text-sm text-gray-600">{translateHabitsItem(item, language)}</span>
                     </li>
                   ))}
                 </ul>
@@ -251,9 +258,9 @@ function ResultPage() {
           {/* Risk Level Badge */}
           <Card className="p-4 mb-6 text-center" hover={false} id="risk-badge">
             <div className="flex items-center justify-center gap-3">
-              <span className="text-sm text-gray-500">Tingkat Risiko:</span>
+              <span className="text-sm text-gray-500">{tr('riskLevelLabel')}</span>
               <span className={`inline-flex items-center px-4 py-1 rounded-full text-white font-bold text-xs ${result.bgColor}`}>
-                {result.level}
+                {result.riskLevel === 'HIGH' ? tr('riskHigh') : result.riskLevel === 'MODERATE' ? tr('riskModerate') : tr('riskLow')}
               </span>
             </div>
           </Card>
@@ -267,7 +274,7 @@ function ResultPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              Ulangi Asesmen
+              {tr('retakeBtn')}
             </Button>
             <Button
               to="/about"
@@ -277,17 +284,15 @@ function ResultPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Pelajari Lebih Lanjut
+              {tr('learnMoreBtn')}
             </Button>
           </div>
 
           {/* Disclaimer */}
           <div className="text-center py-6 border-t border-gray-200" id="result-disclaimer">
             <p className="text-xs text-gray-400 leading-relaxed max-w-lg mx-auto">
-              <span className="font-bold text-gray-500">Disclaimer Medis:</span>{' '}
-              Hasil asesmen ini dihasilkan oleh model AI dan hanya untuk tujuan informasi.
-              Ini BUKAN pengganti diagnosis dari dokter.
-              Silakan konsultasikan dengan tenaga medis profesional untuk diagnosis dan penanganan yang tepat.
+              <span className="font-bold text-gray-500">{tr('disclaimerLabel')}</span>{' '}
+              {tr('disclaimerText')}
             </p>
           </div>
         </div>

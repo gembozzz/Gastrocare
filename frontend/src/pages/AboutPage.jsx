@@ -1,43 +1,29 @@
 import Card from '../components/Card'
+import { useLanguage } from '../lib/languageContext'
+import { t } from '../lib/translations'
 
 function AboutPage() {
-  const symptoms = [
-    { name: 'Heartburn', desc: 'Burning sensation in the chest' },
-    { name: 'Chest discomfort', desc: 'Pain or pressure in chest area' },
-    { name: 'Regurgitation', desc: 'Sour or bitter taste in mouth' },
-    { name: 'Difficulty swallowing', desc: 'Feeling of food stuck in throat' },
-    { name: 'Chronic cough', desc: 'Persistent dry cough' },
-    { name: 'Hoarseness', desc: 'Changes in voice quality' },
+  const { language } = useLanguage()
+  const tr = (key) => t('about', key, language)
+
+  const diseaseColors = [
+    { color: 'from-blue-500 to-blue-600', bgColor: 'bg-blue-50' },
+    { color: 'from-rose-500 to-pink-600', bgColor: 'bg-rose-50' },
+    { color: 'from-amber-500 to-orange-600', bgColor: 'bg-amber-50' },
+    { color: 'from-emerald-500 to-teal-600', bgColor: 'bg-emerald-50' },
+    { color: 'from-violet-500 to-purple-600', bgColor: 'bg-violet-50' },
   ]
 
-  const causes = [
-    'Obesity or being overweight',
-    'Hiatal hernia (when part of the stomach pushes through the diaphragm)',
-    'Pregnancy',
-    'Smoking',
-    'Certain foods and beverages (fatty foods, caffeine, alcohol, chocolate)',
+  const detectionColors = [
+    { color: 'from-blue-500 to-blue-600', bgColor: 'bg-blue-50' },
+    { color: 'from-emerald-500 to-emerald-600', bgColor: 'bg-emerald-50' },
+    { color: 'from-violet-500 to-violet-600', bgColor: 'bg-violet-50' },
   ]
 
-  const detectionPoints = [
-    {
-      title: 'Prevent Complications',
-      desc: 'Untreated GERD can lead to esophageal damage, Barrett\'s esophagus, or even esophageal cancer.',
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
-    },
-    {
-      title: 'Improve Quality of Life',
-      desc: 'Managing symptoms can significantly improve sleep, eating habits, and daily activities.',
-      color: 'from-emerald-500 to-emerald-600',
-      bgColor: 'bg-emerald-50',
-    },
-    {
-      title: 'Effective Treatment',
-      desc: 'Many treatment options are available, from lifestyle changes to medications and procedures.',
-      color: 'from-violet-500 to-violet-600',
-      bgColor: 'bg-violet-50',
-    },
-  ]
+  const diseases = tr('diseases')
+  const symptoms = tr('symptoms')
+  const riskFactors = tr('riskFactors')
+  const detectionPoints = tr('detectionPoints')
 
   return (
     <div>
@@ -47,10 +33,10 @@ function AboutPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.1),transparent)]" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 animate-fade-in-up">
-            Understanding GERD
+            {tr('headerTitle')}
           </h1>
           <p className="text-blue-100 text-lg max-w-2xl mx-auto animate-fade-in-up animate-delay-100">
-            Learn about Gastroesophageal Reflux Disease and why early detection matters
+            {tr('headerDesc')}
           </p>
         </div>
       </section>
@@ -58,8 +44,8 @@ function AboutPage() {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
 
-        {/* What is GERD */}
-        <Card className="p-8 sm:p-10" hover={false} id="what-is-gerd">
+        {/* Tentang Kesehatan Lambung */}
+        <Card className="p-8 sm:p-10" hover={false} id="tentang-kesehatan-lambung">
           <div className="flex items-start gap-5">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/25">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,29 +53,64 @@ function AboutPage() {
               </svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">What is GERD?</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">{tr('sectionAboutTitle')}</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Gastroesophageal Reflux Disease (GERD) is a chronic digestive condition where stomach acid or bile flows back into the esophagus, irritating its lining. This backward flow of acid is called acid reflux.
+                {tr('sectionAboutP1')}
               </p>
               <p className="text-gray-600 leading-relaxed">
-                While occasional acid reflux is common, GERD occurs when reflux happens frequently and causes troublesome symptoms or complications. It affects millions of people worldwide and can significantly impact quality of life if left untreated.
+                {tr('sectionAboutP2')}
               </p>
             </div>
           </div>
         </Card>
 
-        {/* Common Symptoms */}
-        <Card className="p-8 sm:p-10" hover={false} id="common-symptoms">
+        {/* Jenis-jenis Penyakit Lambung */}
+        <Card className="p-8 sm:p-10" hover={false} id="jenis-penyakit-lambung">
+          <div className="flex items-start gap-5 mb-6">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-rose-500/25">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">{tr('sectionDiseasesTitle')}</h2>
+              <p className="text-gray-500 text-sm">
+                {tr('sectionDiseasesDesc')}
+              </p>
+            </div>
+          </div>
+          <div className="space-y-4 ml-0 sm:ml-17">
+            {Array.isArray(diseases) && diseases.map((disease, index) => (
+              <div key={index} className={`p-5 rounded-xl ${diseaseColors[index]?.bgColor || 'bg-gray-50'} border border-gray-100/50`}>
+                <div className="flex items-start gap-3">
+                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${diseaseColors[index]?.color || 'from-gray-400 to-gray-500'} flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5`}>
+                    <span className="text-white text-xs font-bold">{index + 1}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-0.5">{disease.name}</h3>
+                    <p className="text-xs text-gray-500 italic mb-1.5">{disease.fullName}</p>
+                    <p className="text-sm text-gray-600">{disease.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* Gejala Umum */}
+        <Card className="p-8 sm:p-10" hover={false} id="gejala-umum">
           <div className="flex items-start gap-5 mb-6">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-500/25">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 pt-2">Common Symptoms</h2>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 pt-2">{tr('symptomsTitle')}</h2>
+            </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            {symptoms.map((symptom, index) => (
+            {Array.isArray(symptoms) && symptoms.map((symptom, index) => (
               <div key={index} className="flex items-start gap-3 p-4 rounded-xl bg-gray-50/80 border border-gray-100">
                 <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 mt-1.5 flex-shrink-0" />
                 <div>
@@ -101,8 +122,8 @@ function AboutPage() {
           </div>
         </Card>
 
-        {/* Common Causes */}
-        <Card className="p-8 sm:p-10" hover={false} id="common-causes">
+        {/* Faktor Risiko */}
+        <Card className="p-8 sm:p-10" hover={false} id="faktor-risiko">
           <div className="flex items-start gap-5 mb-6">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/25">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,24 +131,24 @@ function AboutPage() {
               </svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Common Causes</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">{tr('riskFactorsTitle')}</h2>
               <p className="text-gray-500 text-sm mb-4">
-                GERD occurs when the lower esophageal sphincter (LES) becomes weak or relaxes inappropriately. Several factors can contribute to this:
+                {tr('riskFactorsDesc')}
               </p>
             </div>
           </div>
           <ul className="space-y-3 ml-0 sm:ml-17">
-            {causes.map((cause, index) => (
+            {Array.isArray(riskFactors) && riskFactors.map((factor, index) => (
               <li key={index} className="flex items-start gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 mt-1.5 flex-shrink-0" />
-                <span className="text-gray-600 text-sm">{cause}</span>
+                <span className="text-gray-600 text-sm">{factor}</span>
               </li>
             ))}
           </ul>
         </Card>
 
-        {/* Why Early Detection Matters */}
-        <Card className="p-8 sm:p-10" hover={false} id="early-detection">
+        {/* Pentingnya Deteksi Dini */}
+        <Card className="p-8 sm:p-10" hover={false} id="deteksi-dini">
           <div className="flex items-start gap-5 mb-8">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-violet-500/25">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,17 +156,17 @@ function AboutPage() {
               </svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Why Early Detection Matters</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">{tr('detectionTitle')}</h2>
               <p className="text-gray-500 text-sm">
-                Identifying GERD early is crucial for several reasons:
+                {tr('detectionDesc')}
               </p>
             </div>
           </div>
           <div className="space-y-5 ml-0 sm:ml-17">
-            {detectionPoints.map((point, index) => (
-              <div key={index} className={`p-5 rounded-xl ${point.bgColor} border border-gray-100/50`}>
+            {Array.isArray(detectionPoints) && detectionPoints.map((point, index) => (
+              <div key={index} className={`p-5 rounded-xl ${detectionColors[index]?.bgColor || 'bg-gray-50'} border border-gray-100/50`}>
                 <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${point.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${detectionColors[index]?.color || 'from-gray-400 to-gray-500'} flex items-center justify-center flex-shrink-0 shadow-sm`}>
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -163,10 +184,8 @@ function AboutPage() {
         {/* Disclaimer */}
         <div className="py-6 border-t border-gray-200" id="about-disclaimer">
           <p className="text-xs text-gray-400 leading-relaxed">
-            <span className="font-bold text-gray-500">Medical Disclaimer:</span>{' '}
-            This questionnaire is for educational purposes only and is not a substitute for professional medical
-            advice, diagnosis, or treatment. Always consult with a qualified healthcare provider regarding any
-            medical condition.
+            <span className="font-bold text-gray-500">{tr('disclaimerLabel')}</span>{' '}
+            {tr('disclaimerText')}
           </p>
         </div>
       </div>

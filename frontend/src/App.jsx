@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './lib/authContext'
+import { LanguageProvider } from './lib/languageContext'
 import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
@@ -12,28 +13,30 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public pages with Navbar + Footer */}
-          <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
-          <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
-          <Route path="/questionnaire" element={<PublicLayout><QuestionnairePage /></PublicLayout>} />
-          <Route path="/result" element={<PublicLayout><ResultPage /></PublicLayout>} />
+    <LanguageProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            {/* Public pages with Navbar + Footer */}
+            <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+            <Route path="/about" element={<PublicLayout><AboutPage /></PublicLayout>} />
+            <Route path="/questionnaire" element={<PublicLayout><QuestionnairePage /></PublicLayout>} />
+            <Route path="/result" element={<PublicLayout><ResultPage /></PublicLayout>} />
 
-          {/* Admin pages — NO Navbar/Footer */}
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <AdminDashboardPage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
+            {/* Admin pages — NO Navbar/Footer */}
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </LanguageProvider>
   )
 }
 
@@ -48,3 +51,4 @@ function PublicLayout({ children }) {
 }
 
 export default App
+

@@ -1,7 +1,12 @@
 import Button from '../components/Button'
 import Card from '../components/Card'
+import { useLanguage } from '../lib/languageContext'
+import { t } from '../lib/translations'
 
 function HomePage() {
+  const { language } = useLanguage()
+  const tr = (key) => t('home', key, language)
+
   return (
     <div>
       {/* Hero Section */}
@@ -17,26 +22,25 @@ function HomePage() {
             <div className="animate-slide-in-left">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/80 text-blue-700 text-xs font-semibold mb-6 border border-blue-200/50">
                 <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                Science-based GERD Assessment
+                {tr('badge')}
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-                Check Your{' '}
-                <span className="gradient-text">GERD Risk</span>{' '}
-                Easily
+                {tr('heroTitle1')}
+                <span className="gradient-text">{tr('heroTitleHighlight')}</span>
+                {tr('heroTitle2')}
               </h1>
               <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
-                Take our quick, science-based questionnaire to assess your risk for 
-                Gastroesophageal Reflux Disease. Get personalized insights in just a few minutes.
+                {tr('heroDesc')}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button to="/questionnaire" id="hero-cta">
-                  Start Questionnaire
+                  {tr('startBtn')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Button>
                 <Button to="/about" variant="secondary" id="hero-learn-more">
-                  Learn More
+                  {tr('learnMore')}
                 </Button>
               </div>
             </div>
@@ -69,7 +73,7 @@ function HomePage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <span className="text-xs font-semibold text-gray-700">Quick Results</span>
+                    <span className="text-xs font-semibold text-gray-700">{tr('badgeQuick')}</span>
                   </div>
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg shadow-black/10 px-4 py-3 animate-float" style={{ animationDelay: '1s' }}>
@@ -79,7 +83,7 @@ function HomePage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                     </div>
-                    <span className="text-xs font-semibold text-gray-700">100% Private</span>
+                    <span className="text-xs font-semibold text-gray-700">{tr('badgePrivate')}</span>
                   </div>
                 </div>
               </div>
@@ -93,10 +97,10 @@ function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why Use Our <span className="gradient-text">Questionnaire</span>?
+              {tr('featuresTitle1')}<span className="gradient-text">{tr('featuresTitleHighlight')}</span>{tr('featuresTitle2')}
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto">
-              Our assessment tool is designed to give you quick, reliable insights about your digestive health.
+              {tr('featuresDesc')}
             </p>
           </div>
 
@@ -108,9 +112,9 @@ function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Quick & Easy</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">{tr('feature1Title')}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">
-                Complete the assessment in just 5 minutes with simple, clear questions about your symptoms.
+                {tr('feature1Desc')}
               </p>
             </Card>
 
@@ -121,9 +125,9 @@ function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">AI-Based</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">{tr('feature2Title')}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">
-                Our algorithm analyzes your responses using evidence-based criteria to provide accurate insights.
+                {tr('feature2Desc')}
               </p>
             </Card>
 
@@ -134,9 +138,9 @@ function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Private & Secure</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">{tr('feature3Title')}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">
-                Your responses are confidential and used only to provide you with personalized results.
+                {tr('feature3Desc')}
               </p>
             </Card>
           </div>
@@ -153,10 +157,10 @@ function HomePage() {
 
             <div className="relative px-8 py-16 sm:px-16 sm:py-20 text-center">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Ready to Check Your GERD Risk?
+                {tr('ctaTitle')}
               </h2>
               <p className="text-blue-100 mb-8 max-w-xl mx-auto">
-                Early detection and awareness can help you take control of your digestive health.
+                {tr('ctaDesc')}
               </p>
               <Button
                 to="/questionnaire"
@@ -164,7 +168,7 @@ function HomePage() {
                 className="!bg-white !text-blue-600 !border-white hover:!bg-blue-50 !shadow-xl !shadow-black/10"
                 id="cta-button"
               >
-                Get Started Now
+                {tr('ctaBtn')}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
