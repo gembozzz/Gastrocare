@@ -7,9 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (for Docker cache)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies explicitly to avoid bloated requirements.txt
+RUN pip install --no-cache-dir fastapi uvicorn tensorflow joblib numpy keras==3.13.2 scikit-learn
 
 # Copy application code and model files
 COPY . .

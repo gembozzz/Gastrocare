@@ -10,6 +10,7 @@ import AdminLoginPage from './pages/AdminLoginPage'
 import AdminDashboardPage from './pages/AdminDashboardPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import Footer from './components/Footer'
+import ChatbotWidget from './components/chatbot/ChatbotWidget'
 
 function App() {
   return (
@@ -42,10 +43,11 @@ function App() {
 
 function PublicLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 font-sans relative">
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <ChatbotWidget />
     </div>
   )
 }

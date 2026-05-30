@@ -65,6 +65,7 @@ async function submitAssessment(req, res, next) {
         top3: result.top3,
         semuaProbabilitas: result.semuaProbabilitas,
         peringatan: result.peringatan,
+        gejala_input: result.gejala_input,
         // Backward-compatible fields
         totalScore: result.totalScore,
         maxScore: result.maxScore,

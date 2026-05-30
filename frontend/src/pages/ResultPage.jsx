@@ -5,6 +5,8 @@ import Button from '../components/Button'
 import { useLanguage } from '../lib/languageContext'
 import { t } from '../lib/translations'
 import { translateRecommendation, translateHabitsTitle, translateHabitsItem, translateWarning } from '../lib/dataTranslations'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import ResultPDF from '../components/pdf/ResultPDF'
 
 // ── Risk Level → Display Config ────────────────────────
 
@@ -267,6 +269,28 @@ function ResultPage() {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-8" id="result-actions">
+            <PDFDownloadLink
+              document={<ResultPDF result={result} summaryData={location.state?.summaryData} />}
+              fileName="gastrocare-result.pdf"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 cursor-pointer bg-gradient-to-r from-blue-500 to-emerald-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              {({ loading }) => (
+                <>
+                  {loading ? (
+                    <svg className="animate-spin w-5 h-5 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  )}
+                  {loading ? 'Generating PDF...' : 'Download Result PDF'}
+                </>
+              )}
+            </PDFDownloadLink>
+
             <Button
               to="/questionnaire"
               id="retake-assessment"

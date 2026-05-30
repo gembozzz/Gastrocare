@@ -99,8 +99,17 @@ function QuestionnairePage() {
         })),
       }
 
+      const summaryData = questions.map((q, i) => ({
+        question: q.question,
+        answer: q.options[answers[i]].text,
+      }))
+
       const result = await submitAssessment(payload)
-      navigate('/result', { state: { result } })
+      
+      // Save result for Chatbot context
+      localStorage.setItem('gastrocare_last_prediction', JSON.stringify(result))
+      
+      navigate('/result', { state: { result, summaryData } })
     } catch (err) {
       setError(err.message)
     } finally {

@@ -9,8 +9,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install dependencies
-RUN npm ci --omit=dev
+# Install dependencies (termasuk devDependencies agar prisma CLI tersedia lokal)
+RUN npm ci
 
 # Generate Prisma Client
 RUN npx prisma generate

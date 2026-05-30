@@ -1,14 +1,30 @@
+import { useLanguage } from '../lib/languageContext'
+
 function ProgressBar({ current, total }) {
   const percentage = Math.round((current / total) * 100)
+  const { language } = useLanguage()
+
+  const translations = {
+    en: {
+      question: `Question ${current} of ${total}`,
+      complete: `${percentage}% Complete`
+    },
+    id: {
+      question: `Pertanyaan ${current} dari ${total}`,
+      complete: `${percentage}% Selesai`
+    }
+  }
+
+  const t = translations[language] || translations.id
 
   return (
     <div className="w-full" id="progress-section">
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm font-semibold text-blue-600">
-          Question {current} of {total}
+          {t.question}
         </span>
         <span className="text-sm font-medium text-gray-400">
-          {percentage}% Complete
+          {t.complete}
         </span>
       </div>
       <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">

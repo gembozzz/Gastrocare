@@ -287,6 +287,7 @@ async function calculateRisk(answers, questions) {
     top3: aiResult.top3,
     semuaProbabilitas: aiResult.semua_probabilitas,
     peringatan: aiResult.peringatan || null,
+    gejala_input: aiPayload, // Tambahkan gejala_input untuk chatbot
 
     // Data backward-compatible
     totalScore,
