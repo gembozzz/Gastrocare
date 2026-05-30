@@ -270,9 +270,17 @@ async function calculateRisk(answers, questions) {
 
   const aiResult = await response.json();
 
-  // Ambil rekomendasi berdasarkan penyakit yang diprediksi
+  // Ambil rekomendasi berdasarkan penyakit yang diprediksi (dengan normalisasi string)
+  const normalizedPrediksi = String(aiResult.prediksi).toLowerCase().replace(/_/g, ' ');
+  
+  // Buat mapping case-insensitive untuk pencocokan yang aman
+  const diseaseMap = {};
+  for (const key in DISEASE_RECOMMENDATIONS) {
+    diseaseMap[key.toLowerCase().replace(/_/g, ' ')] = DISEASE_RECOMMENDATIONS[key];
+  }
+
   const diseaseInfo =
-    DISEASE_RECOMMENDATIONS[aiResult.prediksi] ||
+    diseaseMap[normalizedPrediksi] ||
     DISEASE_RECOMMENDATIONS['Sehat'];
 
   // Hitung total score sederhana untuk backward compatibility
