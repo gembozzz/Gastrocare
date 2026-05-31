@@ -91,7 +91,20 @@ function AboutPage() {
                   <div>
                     <h3 className="font-bold text-gray-800 mb-0.5">{disease.name}</h3>
                     <p className="text-xs text-gray-500 italic mb-1.5">{disease.fullName}</p>
-                    <p className="text-sm text-gray-600">{disease.desc}</p>
+                    <p className="text-sm text-gray-600 mb-2">{disease.desc}</p>
+                    {disease.journalLink && (
+                      <a
+                        href={disease.journalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        {language === 'id' ? 'Baca Jurnal' : 'Read Journal'}
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
