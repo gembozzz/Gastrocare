@@ -127,6 +127,16 @@ const translations = {
           fullName: 'Radang Lambung dan Usus',
           desc: 'Infeksi atau peradangan pada lambung dan usus yang menyebabkan diare, mual, muntah, dan kram perut, sering disebabkan oleh virus atau bakteri.',
         },
+        {
+          name: 'Kanker Lambung',
+          fullName: 'Kanker Lambung',
+          desc: 'Kondisi serius berupa pertumbuhan sel abnormal pada dinding lambung yang dapat menyebar ke organ lain.',
+        },
+        {
+          name: 'Gastroparesis',
+          fullName: 'Kelumpuhan Lambung',
+          desc: 'Kondisi di mana lambung mengosongkan makanan terlalu lambat ke usus kecil akibat gangguan saraf atau otot lambung.',
+        },
       ],
       symptoms: [
         { name: 'Nyeri Ulu Hati', desc: 'Rasa sakit atau perih di area perut bagian atas' },
@@ -210,6 +220,16 @@ const translations = {
           name: 'Gastroenteritis',
           fullName: 'Stomach and Intestinal Inflammation',
           desc: 'Infection or inflammation of the stomach and intestines causing diarrhea, nausea, vomiting, and abdominal cramps, often caused by viruses or bacteria.',
+        },
+        {
+          name: 'Stomach Cancer',
+          fullName: 'Gastric Cancer',
+          desc: 'A serious condition involving the growth of abnormal cells in the stomach lining that can spread to other organs.',
+        },
+        {
+          name: 'Gastroparesis',
+          fullName: 'Delayed Gastric Emptying',
+          desc: 'A condition where the stomach empties food into the small intestine too slowly due to nerve or muscle damage.',
         },
       ],
       symptoms: [

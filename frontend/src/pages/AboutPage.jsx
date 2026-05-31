@@ -12,6 +12,8 @@ function AboutPage() {
     { color: 'from-amber-500 to-orange-600', bgColor: 'bg-amber-50' },
     { color: 'from-emerald-500 to-teal-600', bgColor: 'bg-emerald-50' },
     { color: 'from-violet-500 to-purple-600', bgColor: 'bg-violet-50' },
+    { color: 'from-cyan-500 to-cyan-600', bgColor: 'bg-cyan-50' },
+    { color: 'from-fuchsia-500 to-fuchsia-600', bgColor: 'bg-fuchsia-50' },
   ]
 
   const detectionColors = [
