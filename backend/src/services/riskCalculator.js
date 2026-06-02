@@ -97,9 +97,9 @@ const DISEASE_RECOMMENDATIONS = {
   Sehat: {
     riskLevel: 'LOW',
     recommendation:
-      'Berdasarkan analisis AI, kondisi lambung Anda terindikasi sehat. Tetap jaga pola makan dan gaya hidup sehat untuk mencegah gangguan pencernaan.',
+      'Kabar baik! Dari keluhan yang Anda sampaikan, kondisi lambung Anda saat ini tampak sehat dan berfungsi dengan baik. Pertahankan terus gaya hidup dan pola makan sehat Anda agar pencernaan selalu nyaman dan terjaga.',
     habits: {
-      title: 'Tips menjaga kesehatan lambung:',
+      title: 'Beberapa tips untuk menjaga lambung Anda tetap sehat:',
       items: [
         'Makan teratur dengan porsi yang sesuai',
         'Hindari makanan pedas, asam, dan berlemak berlebihan',
@@ -112,9 +112,9 @@ const DISEASE_RECOMMENDATIONS = {
   Gastritis: {
     riskLevel: 'MODERATE',
     recommendation:
-      'Model AI mendeteksi kemungkinan Gastritis (radang lambung). Segera konsultasikan ke dokter untuk evaluasi dan pengobatan yang tepat.',
+      'Berdasarkan keluhan yang Anda rasakan, kami melihat ada indikasi ke arah Gastritis (radang lambung). Jangan terlalu khawatir, kondisi ini sangat umum terjadi. Namun, untuk memastikan kenyamanan Anda, kami sangat menyarankan Anda untuk berdiskusi dengan dokter agar mendapatkan penanganan yang paling tepat.',
     habits: {
-      title: 'Langkah yang disarankan:',
+      title: 'Langkah-langkah yang bisa Anda lakukan mulai sekarang:',
       items: [
         'Hindari makanan pedas, asam, dan berminyak',
         'Makan dalam porsi kecil tapi sering',
@@ -127,9 +127,9 @@ const DISEASE_RECOMMENDATIONS = {
   'Tukak Lambung': {
     riskLevel: 'HIGH',
     recommendation:
-      'Model AI mendeteksi kemungkinan Tukak Lambung (ulkus peptikum). Ini adalah kondisi serius — segera konsultasikan ke dokter spesialis gastroenterologi.',
+      'Melihat dari keluhan yang Anda sampaikan, gejala tersebut mengarah pada kemungkinan Tukak Lambung. Kami memahami hal ini mungkin membuat Anda kurang nyaman. Oleh karena itu, sangat penting bagi Anda untuk segera berkonsultasi dengan dokter spesialis, agar Anda bisa mendapatkan perawatan yang tepat dan segera kembali pulih.',
     habits: {
-      title: 'Tindakan penting:',
+      title: 'Tindakan penting untuk pemulihan Anda:',
       items: [
         'Segera periksakan ke dokter gastroenterologi',
         'Jangan abaikan nyeri perut yang persisten',
@@ -142,9 +142,9 @@ const DISEASE_RECOMMENDATIONS = {
   GERD: {
     riskLevel: 'MODERATE',
     recommendation:
-      'Model AI mendeteksi kemungkinan GERD (Gastroesophageal Reflux Disease). Konsultasikan ke dokter untuk penanganan yang sesuai.',
+      'Dari pola gejala yang Anda bagikan, sepertinya Anda mungkin sedang mengalami GERD (asam lambung naik). Kondisi ini memang kerap mengganggu kenyamanan sehari-hari. Kami sarankan Anda untuk memeriksakannya ke dokter, karena dengan penyesuaian gaya hidup dan pengobatan yang tepat, kondisi ini bisa diatasi dengan baik.',
     habits: {
-      title: 'Langkah yang disarankan:',
+      title: 'Langkah-langkah untuk mengurangi keluhan:',
       items: [
         'Tinggikan kepala saat tidur 15-20 cm',
         'Hindari makan 2-3 jam sebelum tidur',
@@ -157,9 +157,9 @@ const DISEASE_RECOMMENDATIONS = {
   'Dispepsia Fungsional': {
     riskLevel: 'MODERATE',
     recommendation:
-      'Model AI mendeteksi kemungkinan Dispepsia Fungsional. Kondisi ini sering dipicu oleh stres dan pola makan tidak teratur.',
+      'Keluhan yang Anda rasakan mengindikasikan adanya kemungkinan Dispepsia Fungsional. Kondisi ini sering kali berkaitan erat dengan tingkat stres dan pola makan yang tidak menentu. Cobalah untuk lebih rileks dan perlahan atur kembali jadwal makan Anda. Jika keluhan masih berlanjut, jangan ragu untuk berkonsultasi dengan dokter.',
     habits: {
-      title: 'Langkah yang disarankan:',
+      title: 'Tips untuk membuat perut terasa lebih nyaman:',
       items: [
         'Atur pola makan teratur — jangan telat makan',
         'Makan dalam porsi kecil tapi sering (5-6x sehari)',
@@ -172,9 +172,9 @@ const DISEASE_RECOMMENDATIONS = {
   Gastroparesis: {
     riskLevel: 'HIGH',
     recommendation:
-      'Model AI mendeteksi kemungkinan Gastroparesis (gangguan pengosongan lambung). Segera konsultasikan ke dokter spesialis.',
+      'Kami memperhatikan bahwa gejala yang Anda alami menunjukkan indikasi Gastroparesis (perlambatan pengosongan lambung). Agar kondisi pencernaan Anda tidak semakin mengganggu aktivitas, kami sangat menyarankan Anda untuk segera menemui dokter spesialis agar mendapat evaluasi dan solusi yang terbaik untuk Anda.',
     habits: {
-      title: 'Tindakan penting:',
+      title: 'Langkah-langkah yang sangat kami sarankan:',
       items: [
         'Segera periksakan ke dokter gastroenterologi',
         'Makan porsi kecil tapi sering — hindari makan besar',
@@ -187,9 +187,9 @@ const DISEASE_RECOMMENDATIONS = {
   Gastroenteritis: {
     riskLevel: 'MODERATE',
     recommendation:
-      'Model AI mendeteksi kemungkinan Gastroenteritis (infeksi saluran cerna). Pastikan hidrasi yang cukup dan konsultasikan ke dokter.',
+      'Dari gejala yang muncul, sepertinya pencernaan Anda sedang mengalami infeksi ringan atau Gastroenteritis. Yang paling penting saat ini adalah menjaga tubuh Anda tetap terhidrasi dengan baik. Mohon segera periksakan diri ke dokter jika kondisi belum membaik, agar Anda bisa cepat kembali beraktivitas dengan nyaman.',
     habits: {
-      title: 'Langkah yang disarankan:',
+      title: 'Perawatan mandiri yang bisa Anda terapkan:',
       items: [
         'Pastikan hidrasi cukup — minum oralit atau air putih',
         'Makan makanan lunak: bubur, roti, pisang',
@@ -202,9 +202,9 @@ const DISEASE_RECOMMENDATIONS = {
   'Kanker Lambung': {
     riskLevel: 'HIGH',
     recommendation:
-      'Model AI mendeteksi kemungkinan tanda-tanda yang perlu pemeriksaan lebih lanjut untuk Kanker Lambung. Segera periksakan ke dokter spesialis untuk evaluasi mendalam.',
+      'Terima kasih sudah berbagi keluhan Anda dengan kami. Beberapa gejala yang Anda sampaikan merupakan sinyal penting dari tubuh yang memerlukan perhatian ekstra dan evaluasi medis lebih lanjut. Kami sangat menganjurkan Anda untuk segera memeriksakan diri ke dokter spesialis guna memastikan kondisi Anda secara menyeluruh. Pemeriksaan lebih awal adalah langkah pencegahan yang sangat bijak.',
     habits: {
-      title: '⚠️ Tindakan segera:',
+      title: '⚠️ Tindakan segera yang perlu Anda ambil:',
       items: [
         'SEGERA periksakan ke dokter spesialis gastroenterologi',
         'Minta pemeriksaan endoskopi dan biopsi',

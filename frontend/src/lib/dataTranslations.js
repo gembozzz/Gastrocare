@@ -69,38 +69,42 @@ const optionTranslations = {
 
 const recommendationTranslations = {
   // Recommendations
-  'Berdasarkan analisis AI, kondisi lambung Anda terindikasi sehat. Tetap jaga pola makan dan gaya hidup sehat untuk mencegah gangguan pencernaan.':
-    'Based on AI analysis, your stomach condition appears healthy. Maintain a healthy diet and lifestyle to prevent digestive disorders.',
+  'Kabar baik! Dari keluhan yang Anda sampaikan, kondisi lambung Anda saat ini tampak sehat dan berfungsi dengan baik. Pertahankan terus gaya hidup dan pola makan sehat Anda agar pencernaan selalu nyaman dan terjaga.':
+    'Great news! Based on the symptoms you shared, your stomach currently appears to be healthy and functioning well. Keep up your healthy lifestyle and diet so your digestion remains comfortable and well-maintained.',
 
-  'Model AI mendeteksi kemungkinan Gastritis (radang lambung). Segera konsultasikan ke dokter untuk evaluasi dan pengobatan yang tepat.':
-    'The AI model detected a possibility of Gastritis (stomach inflammation). Please consult a doctor for proper evaluation and treatment.',
+  'Berdasarkan keluhan yang Anda rasakan, kami melihat ada indikasi ke arah Gastritis (radang lambung). Jangan terlalu khawatir, kondisi ini sangat umum terjadi. Namun, untuk memastikan kenyamanan Anda, kami sangat menyarankan Anda untuk berdiskusi dengan dokter agar mendapatkan penanganan yang paling tepat.':
+    'Based on the symptoms you are experiencing, we see indications pointing towards Gastritis (stomach inflammation). Don\'t worry too much, this condition is very common. However, to ensure your comfort, we highly recommend discussing this with a doctor to get the most appropriate treatment.',
 
-  'Model AI mendeteksi kemungkinan Tukak Lambung (ulkus peptikum). Ini adalah kondisi serius — segera konsultasikan ke dokter spesialis gastroenterologi.':
-    'The AI model detected a possibility of Peptic Ulcer. This is a serious condition — please consult a gastroenterology specialist immediately.',
+  'Melihat dari keluhan yang Anda sampaikan, gejala tersebut mengarah pada kemungkinan Tukak Lambung. Kami memahami hal ini mungkin membuat Anda kurang nyaman. Oleh karena itu, sangat penting bagi Anda untuk segera berkonsultasi dengan dokter spesialis, agar Anda bisa mendapatkan perawatan yang tepat dan segera kembali pulih.':
+    'Looking at the symptoms you shared, they point to the possibility of a Peptic Ulcer. We understand this might make you uncomfortable. Therefore, it is crucial for you to immediately consult a specialist so you can receive the right treatment and recover soon.',
 
-  'Model AI mendeteksi kemungkinan GERD (Gastroesophageal Reflux Disease). Konsultasikan ke dokter untuk penanganan yang sesuai.':
-    'The AI model detected a possibility of GERD (Gastroesophageal Reflux Disease). Consult a doctor for appropriate treatment.',
+  'Dari pola gejala yang Anda bagikan, sepertinya Anda mungkin sedang mengalami GERD (asam lambung naik). Kondisi ini memang kerap mengganggu kenyamanan sehari-hari. Kami sarankan Anda untuk memeriksakannya ke dokter, karena dengan penyesuaian gaya hidup dan pengobatan yang tepat, kondisi ini bisa diatasi dengan baik.':
+    'From the symptom pattern you shared, it seems you might be experiencing GERD (acid reflux). This condition can indeed disrupt daily comfort. We suggest getting it checked by a doctor, because with the right lifestyle adjustments and treatment, it can be managed very well.',
 
-  'Model AI mendeteksi kemungkinan Dispepsia Fungsional. Kondisi ini sering dipicu oleh stres dan pola makan tidak teratur.':
-    'The AI model detected a possibility of Functional Dyspepsia. This condition is often triggered by stress and irregular eating patterns.',
+  'Keluhan yang Anda rasakan mengindikasikan adanya kemungkinan Dispepsia Fungsional. Kondisi ini sering kali berkaitan erat dengan tingkat stres dan pola makan yang tidak menentu. Cobalah untuk lebih rileks dan perlahan atur kembali jadwal makan Anda. Jika keluhan masih berlanjut, jangan ragu untuk berkonsultasi dengan dokter.':
+    'Your symptoms indicate the possibility of Functional Dyspepsia. This condition is often closely related to stress levels and irregular eating habits. Try to relax more and slowly regulate your meal schedule. If symptoms persist, don\'t hesitate to consult a doctor.',
 
-  'Model AI mendeteksi kemungkinan Gastroparesis (gangguan pengosongan lambung). Segera konsultasikan ke dokter spesialis.':
-    'The AI model detected a possibility of Gastroparesis (delayed stomach emptying). Please consult a specialist immediately.',
+  'Kami memperhatikan bahwa gejala yang Anda alami menunjukkan indikasi Gastroparesis (perlambatan pengosongan lambung). Agar kondisi pencernaan Anda tidak semakin mengganggu aktivitas, kami sangat menyarankan Anda untuk segera menemui dokter spesialis agar mendapat evaluasi dan solusi yang terbaik untuk Anda.':
+    'We noticed that your symptoms show indications of Gastroparesis (delayed stomach emptying). So that your digestive condition does not further disrupt your activities, we strongly advise you to see a specialist soon to get the best evaluation and solution for you.',
 
-  'Model AI mendeteksi kemungkinan Gastroenteritis (infeksi saluran cerna). Pastikan hidrasi yang cukup dan konsultasikan ke dokter.':
-    'The AI model detected a possibility of Gastroenteritis (gastrointestinal infection). Ensure adequate hydration and consult a doctor.',
+  'Dari gejala yang muncul, sepertinya pencernaan Anda sedang mengalami infeksi ringan atau Gastroenteritis. Yang paling penting saat ini adalah menjaga tubuh Anda tetap terhidrasi dengan baik. Mohon segera periksakan diri ke dokter jika kondisi belum membaik, agar Anda bisa cepat kembali beraktivitas dengan nyaman.':
+    'From the symptoms that appear, it seems your digestion is experiencing a mild infection or Gastroenteritis. The most important thing right now is to keep your body well-hydrated. Please see a doctor promptly if the condition does not improve, so you can quickly return to your activities comfortably.',
 
-  'Model AI mendeteksi kemungkinan tanda-tanda yang perlu pemeriksaan lebih lanjut untuk Kanker Lambung. Segera periksakan ke dokter spesialis untuk evaluasi mendalam.':
-    'The AI model detected signs that require further examination for Stomach Cancer. Please see a specialist immediately for thorough evaluation.',
+  'Terima kasih sudah berbagi keluhan Anda dengan kami. Beberapa gejala yang Anda sampaikan merupakan sinyal penting dari tubuh yang memerlukan perhatian ekstra dan evaluasi medis lebih lanjut. Kami sangat menganjurkan Anda untuk segera memeriksakan diri ke dokter spesialis guna memastikan kondisi Anda secara menyeluruh. Pemeriksaan lebih awal adalah langkah pencegahan yang sangat bijak.':
+    'Thank you for sharing your symptoms with us. Some of the symptoms you mentioned are important signals from your body that require extra attention and further medical evaluation. We strongly encourage you to immediately see a specialist to thoroughly check your condition. Early examination is a very wise preventive step.',
 }
 
 // ── Habits Title Translations ────────────────────────
 
 const habitsTitleTranslations = {
-  'Tips menjaga kesehatan lambung:': 'Tips for maintaining stomach health:',
-  'Langkah yang disarankan:': 'Recommended steps:',
-  'Tindakan penting:': 'Important actions:',
-  '⚠️ Tindakan segera:': '⚠️ Immediate actions:',
+  'Beberapa tips untuk menjaga lambung Anda tetap sehat:': 'Some tips to keep your stomach healthy:',
+  'Langkah-langkah yang bisa Anda lakukan mulai sekarang:': 'Steps you can start taking right now:',
+  'Tindakan penting untuk pemulihan Anda:': 'Important actions for your recovery:',
+  'Langkah-langkah untuk mengurangi keluhan:': 'Steps to reduce your discomfort:',
+  'Tips untuk membuat perut terasa lebih nyaman:': 'Tips to make your stomach feel more comfortable:',
+  'Langkah-langkah yang sangat kami sarankan:': 'Steps we highly recommend:',
+  'Perawatan mandiri yang bisa Anda terapkan:': 'Self-care practices you can apply:',
+  '⚠️ Tindakan segera yang perlu Anda ambil:': '⚠️ Immediate actions you need to take:',
 }
 
 // ── Habits Items Translations ────────────────────────
@@ -178,9 +182,14 @@ const errorTranslations = {
 
 // ── Warning Translations ─────────────────────────────
 
-const warningTranslations = {
+const warningTranslationsId = {
   'Kepercayaan model rendah — hasil mungkin kurang akurat. Silakan konsultasi ke dokter.':
-    'Model confidence is low — results may be less accurate. Please consult a doctor.',
+    'Sistem mendeteksi bahwa informasi yang diberikan mungkin belum cukup untuk analisis yang sangat akurat. Untuk kenyamanan Anda, kami sangat menyarankan untuk berdiskusi dengan dokter.',
+}
+
+const warningTranslationsEn = {
+  'Kepercayaan model rendah — hasil mungkin kurang akurat. Silakan konsultasi ke dokter.':
+    'Our analysis indicates that the provided information might not be sufficient for a highly accurate result. For your peace of mind, we highly recommend discussing this with a doctor.',
 }
 
 /**
@@ -234,9 +243,9 @@ export function translateError(text, language) {
 }
 
 /**
- * Translate a warning message from Indonesian to English.
+ * Translate a warning message from Indonesian to English (or softened Indonesian).
  */
 export function translateWarning(text, language) {
-  if (language === 'id') return text
-  return warningTranslations[text] || text
+  if (language === 'id') return warningTranslationsId[text] || text
+  return warningTranslationsEn[text] || text
 }
