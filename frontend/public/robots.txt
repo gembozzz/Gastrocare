@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /result
+
+Sitemap: https://gastrocare-five.vercel.app/sitemap.xml
