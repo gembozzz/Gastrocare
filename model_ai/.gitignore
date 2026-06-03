@@ -1,0 +1,6 @@
+.env
+venv311/
+__pycache__/
+*.pyc
+evaluasi_rag.py
+hasil_evaluasi_rag.csv
