@@ -69,7 +69,7 @@ Model Machine Learning (*Deep Learning Classification*) yang digunakan sudah ter
 
 *(Jika Anda perlu mengunduh atau memeriksa model secara terpisah, Anda dapat mengambil file `model_lambung.keras` beserta file pra-pemrosesan data seperti `scaler.pkl` dan `label_encoder.pkl` dari direktori `model_ai/` di repositori ini).*
 
-Link google drive model AI : https://drive.google.com/file/d/1BBdsI4pDday8omhlbZ5UixrA8cM-Br7s/view
+Link google drive model AI : https://drive.google.com/drive/folders/1Cd2_3BMPGLfB5_DxIw0THcDfooQcy87Z?usp=drive_link
 
 ---
 
