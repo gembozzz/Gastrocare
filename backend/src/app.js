@@ -19,6 +19,9 @@ const analyticsRoutes = require('./routes/analytics');
 
 const app = express();
 
+// Trust the reverse proxy (required for rate limiting behind a proxy like Hugging Face Spaces)
+app.set('trust proxy', 1);
+
 // ── Security Middleware ──────────────────────
 
 // Helmet — set secure HTTP headers
